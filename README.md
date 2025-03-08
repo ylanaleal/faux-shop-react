@@ -1,3 +1,2 @@
-# Projeto para a discuplina 'Projeto de Interfaces com React [25E1_2]'
-
-Projeto desenvolvido com React para a disciplina da Pós MIT em Desenvolvimento Full Stack da Infnet.
+# Villa Pet Hotel
+Trabalho desenvolvido para a disciplina Front-end com React [25E1-25E1] da Pós MIT em Desenvolvimento Full Stack do Infnet.
