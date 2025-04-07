@@ -10,7 +10,7 @@ import {
   NavLink,
 } from 'reactstrap';
 
-import logo from '../assets/images/villa-pet-logo.png';
+import logo from '../assets/images/fauxShop.png';
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -19,7 +19,7 @@ const Header = () => {
 
   return (
     <>
-      <Navbar style={{ backgroundColor: '#A3B7A9' }} dark expand="md">
+      <Navbar style={{ backgroundColor: '#000' }} dark expand="md">
         <NavbarBrand>
           <div
             style={{
@@ -35,9 +35,12 @@ const Header = () => {
             <img
               src={logo}
               width="50px;"
-              style={{ paddingRight: '5px', marginRight: '5px' }}
+              style={{
+                paddingRight: '5px',
+                marginRight: '5px',
+              }}
             />
-            Villa Pet Hotel
+            <span style={{ color: '#fff' }}>Faux Shop</span>
           </div>
         </NavbarBrand>
         <NavbarToggler onClick={toggle} />
@@ -45,17 +48,17 @@ const Header = () => {
           <Nav className="ms-auto" navbar>
             <NavItem>
               <NavLink tag={Link} to="/" style={{ color: 'black' }}>
-                Home
+                <span style={{ color: '#fff' }}>Home</span>
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink tag={Link} to="/sobre" style={{ color: 'black' }}>
-                Sobre
+              <NavLink tag={Link} to="/cart" style={{ color: 'black' }}>
+                <span style={{ color: '#fff' }}>Cart</span>
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink tag={Link} to="/contato" style={{ color: 'black' }}>
-                Contato
+              <NavLink tag={Link} to="/login" style={{ color: 'black' }}>
+                <span style={{ color: '#fff' }}>Login</span>
               </NavLink>
             </NavItem>
           </Nav>

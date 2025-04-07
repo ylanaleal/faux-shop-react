@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const FooterStyle = styled.div`
   font-family: monospace;
-  background: #a3b7a9;
+  background: #000;
   margin-bottom: 0;
   padding: 5px;
   text-align: center;
@@ -11,8 +11,10 @@ const FooterStyle = styled.div`
 
 const Footer = () => {
   return (
-    <FooterStyle>
-      <p style={{ marginBottom: '0' }}>Todos os direitos reservados.</p>
+    <FooterStyle style={{ marginTop: '15px' }}>
+      <p style={{ marginBottom: '0', color: '#fff' }}>
+        Todos os direitos reservados.
+      </p>
     </FooterStyle>
   );
 };
