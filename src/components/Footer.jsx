@@ -11,7 +11,7 @@ const FooterStyle = styled.div`
 
 const Footer = () => {
   return (
-    <FooterStyle style={{ marginTop: '15px' }}>
+    <FooterStyle>
       <p style={{ marginBottom: '0', color: '#fff' }}>
         Todos os direitos reservados.
       </p>

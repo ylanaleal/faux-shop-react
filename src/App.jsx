@@ -21,6 +21,7 @@ function App() {
       <CartProvider>
         <BrowserRouter>
           <Header />
+
           <Routes style={{ background: '#f8f9fa' }}>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />

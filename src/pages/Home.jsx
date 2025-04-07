@@ -26,14 +26,22 @@ const Home = () => {
   if (loading) return <div>Carregando produtos...</div>;
   if (error) return <div>Erro ao carregar produtos.</div>;
 
-  const handleAddToCart = (product) => {
-    dispatch({ type: 'ADD_TO_CART', product });
+  const handleAddToCart = (productId, quantity = 1) => {
+    const productToAdd = products.find((p) => p.id === productId);
+    // if (productToAdd) {
+    console.log('Adding to cart:', productToAdd);
+    dispatch({
+      type: 'ADD_TO_CART',
+      product: { ...productToAdd, quantity },
+    });
+    // }
   };
 
   return (
     <Container
       style={{
         marginTop: '20px',
+        marginBottom: '20px',
         display: 'flex',
         flexWrap: 'wrap',
         justifyContent: 'center',
@@ -44,7 +52,7 @@ const Home = () => {
           key={product.id}
           product={product}
           mode="store"
-          onQuantityChange={handleAddToCart}
+          onQuantityChange={(id, qty) => handleAddToCart(id, qty)}
         />
       ))}
     </Container>

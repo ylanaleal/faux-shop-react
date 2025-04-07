@@ -15,11 +15,39 @@ import {
 
 import logo from '../assets/images/fauxShop.png';
 
+const renderAuthLink = (user, logout) => {
+  if (user) {
+    return (
+      <NavLink
+        onClick={async () => {
+          try {
+            await logout();
+          } catch (error) {
+            console.error('Logout failed:', error);
+          }
+        }}
+        style={{
+          color: '#fff',
+          cursor: 'pointer',
+        }}
+      >
+        Logout
+      </NavLink>
+    );
+  } else {
+    return (
+      <NavLink tag={Link} to="/login">
+        <span style={{ color: '#fff' }}>Login</span>
+      </NavLink>
+    );
+  }
+};
+
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
   const { user, logout } = useAuth();
-  const { cartItems } = useCart();
+  const { cart } = useCart();
 
   return (
     <>
@@ -38,7 +66,7 @@ const Header = () => {
             {' '}
             <img
               src={logo}
-              width="50px;"
+              width="50px"
               style={{
                 paddingRight: '5px',
                 marginRight: '5px',
@@ -75,23 +103,7 @@ const Header = () => {
               </NavItem>
             )}
 
-            <NavItem>
-              {user ? (
-                <NavLink
-                  onClick={logout}
-                  style={{
-                    color: '#fff',
-                    cursor: 'pointer',
-                  }}
-                >
-                  Sair
-                </NavLink>
-              ) : (
-                <NavLink tag={Link} to="/login">
-                  <span style={{ color: '#fff' }}>Login</span>
-                </NavLink>
-              )}
-            </NavItem>
+            <NavItem>{renderAuthLink(user, logout)}</NavItem>
           </Nav>
         </Collapse>
       </Navbar>

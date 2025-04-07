@@ -1,6 +1,5 @@
 // src/context/AuthContext.jsx
 import { createContext, useContext, useState } from 'react';
-import { login as apiLogin } from '../services/apiService';
 
 const AuthContext = createContext();
 
@@ -14,23 +13,30 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     try {
-      const response = await apiLogin({ email, password });
+      const response = await fetch('https://reqres.in/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
 
-      // A API do ReqRes retorna apenas o token, então simulamos os dados do usuário
-      const userData = {
-        email,
-        name: email.split('@')[0], // Extrai o nome do email
-        avatar: `https://i.pravatar.cc/150?u=${email}`, // Avatar aleatório
-      };
+      if (!response.ok) {
+        return false;
+      }
 
-      localStorage.setItem('user', JSON.stringify(userData));
-      localStorage.setItem('token', response.token);
-      setAuthState({ user: userData, token: response.token });
+      const data = await response.json();
 
-      return true;
+      // Atualiza o estado com o usuário e o token
+      const user = { email }; // Simula um objeto de usuário com o email
+      setAuthState({ user, token: data.token });
+
+      // Salva no localStorage para persistência
+      localStorage.setItem('user', JSON.stringify(user));
+      localStorage.setItem('token', data.token);
+
+      return true; // Retorna true se o login for bem-sucedido
     } catch (error) {
-      console.error('Login failed:', error);
-      return false;
+      console.error('Login error:', error);
+      return false; // Retorna false em caso de erro
     }
   };
 

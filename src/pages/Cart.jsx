@@ -34,11 +34,7 @@ const Product = ({ item, onChange }) => {
       </td>
       <td>R$ {(item.price * item.quantity).toFixed(2)}</td>
       <td>
-        <Button
-          color="danger"
-          size="sm"
-          onClick={() => onChange(item.id, 0)} // Quantidade 0 remove o item
-        >
+        <Button color="danger" size="sm" onClick={() => onChange(item.id, 0)}>
           <FaTrash />
         </Button>
       </td>
@@ -64,23 +60,31 @@ const Cart = () => {
   const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
   return (
-    <Container className="my-5">
-      <h2 className="mb-4">Seu Carrinho</h2>
+    <Container
+      style={{
+        minHeight: 'calc(100vh - 105px)',
+        paddingBottom: '25px',
+        paddingTop: '20px',
+      }}
+    >
+      <h2 className="mb-4" style={{ fontWeight: 'bold' }}>
+        Your cart
+      </h2>
 
       {cart.length === 0 ? (
         <Card className="text-center p-5">
-          <CardText>Seu carrinho está vazio.</CardText>
+          <CardText>Your cart is empty.</CardText>
         </Card>
       ) : (
         <>
           <Table responsive>
             <thead>
               <tr>
-                <th>Produto</th>
-                <th>Preço Unitário</th>
-                <th>Quantidade</th>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Quantity</th>
                 <th>Subtotal</th>
-                <th>Ação</th>
+                <th>Action</th>
               </tr>
             </thead>
             <tbody>
@@ -93,18 +97,24 @@ const Cart = () => {
           <Card className="mt-4">
             <CardBody>
               <Row>
-                <Col sm="6">
-                  <Button color="danger" onClick={clearCart}>
-                    Limpar Carrinho
-                  </Button>
-                </Col>
-                <Col sm="6" className="text-end">
+                <Col sm="12" className="text-end">
                   <h5>
                     Total: <strong>R$ {total.toFixed(2)}</strong>
                   </h5>
-                  <Button color="success" className="mt-2">
-                    Finalizar Compra
-                  </Button>
+                  <span
+                    style={{
+                      display: 'flex',
+                      gap: '10px',
+                      justifyContent: 'end',
+                      marginTop: '20px',
+                    }}
+                  >
+                    <Button color="danger" onClick={clearCart}>
+                      Delete All
+                    </Button>
+
+                    <Button color="success">Finish Purchase</Button>
+                  </span>
                 </Col>
               </Row>
             </CardBody>
