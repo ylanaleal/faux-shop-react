@@ -1,4 +1,4 @@
-# 🐈 Villa Pet Hotel 🐕
+# Faux Shop
 
 <p align="center">
     <b>Projeto desenvolvido para a disciplina Front-end com React [25E1_3] da Pós MIT em Desenvolvimento Full Stack do Infnet.</b>
