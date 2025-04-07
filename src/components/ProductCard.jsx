@@ -10,7 +10,7 @@ import {
 } from 'reactstrap';
 import { FaCartPlus } from 'react-icons/fa';
 
-const ProductCard = ({ product, mode = 'store', onQuantityChange }) => {
+const ProductCard = ({ product, mode = 'store', onQuantityChange, isLoggedIn }) => {
   return (
     <Card
       className="mb-3"
@@ -32,16 +32,26 @@ const ProductCard = ({ product, mode = 'store', onQuantityChange }) => {
         </CardText>
 
         {mode === 'store' ? (
-          <Button
-            color="success"
-            size="sm"
-            onClick={() => onQuantityChange(product)}
-          >
-            <span style={{ display: 'flex', alignItems: 'center' }}>
-              <FaCartPlus className="me-2" />
-              Adicionar
-            </span>
-          </Button>
+          isLoggedIn ? (
+            <Button
+              color="success"
+              size="sm"
+              onClick={() => onQuantityChange(product)}
+            >
+              <span style={{ display: 'flex', alignItems: 'center' }}>
+                <FaCartPlus className="me-2" />
+                Add
+              </span>
+            </Button>
+          ) : (
+            <Button
+              color="primary"
+              size="sm"
+              onClick={() => (window.location.href = '/login')}
+            >
+              See more
+            </Button>
+          )
         ) : (
           <div>
             <Input

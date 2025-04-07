@@ -1,5 +1,8 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
+import { useCart } from '../context/CartContext';
+
 import {
   Collapse,
   Navbar,
@@ -14,8 +17,9 @@ import logo from '../assets/images/fauxShop.png';
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
-
   const toggle = () => setIsOpen(!isOpen);
+  const { user, logout } = useAuth();
+  const { cartItems } = useCart();
 
   return (
     <>
@@ -40,10 +44,21 @@ const Header = () => {
                 marginRight: '5px',
               }}
             />
-            <span style={{ color: '#fff' }}>Faux Shop</span>
+            <span
+              style={{
+                color: '#fff',
+                fontFamily: 'monospace',
+                fontWeight: 'bold',
+                fontSize: '1.5rem',
+              }}
+            >
+              Faux Shop
+            </span>
           </div>
         </NavbarBrand>
+
         <NavbarToggler onClick={toggle} />
+
         <Collapse isOpen={isOpen} navbar>
           <Nav className="ms-auto" navbar>
             <NavItem>
@@ -51,15 +66,31 @@ const Header = () => {
                 <span style={{ color: '#fff' }}>Home</span>
               </NavLink>
             </NavItem>
+
+            {user && (
+              <NavItem>
+                <NavLink tag={Link} to="/cart">
+                  <span style={{ color: '#fff' }}>Cart</span>
+                </NavLink>
+              </NavItem>
+            )}
+
             <NavItem>
-              <NavLink tag={Link} to="/cart" style={{ color: 'black' }}>
-                <span style={{ color: '#fff' }}>Cart</span>
-              </NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink tag={Link} to="/login" style={{ color: 'black' }}>
-                <span style={{ color: '#fff' }}>Login</span>
-              </NavLink>
+              {user ? (
+                <NavLink
+                  onClick={logout}
+                  style={{
+                    color: '#fff',
+                    cursor: 'pointer',
+                  }}
+                >
+                  Sair
+                </NavLink>
+              ) : (
+                <NavLink tag={Link} to="/login">
+                  <span style={{ color: '#fff' }}>Login</span>
+                </NavLink>
+              )}
             </NavItem>
           </Nav>
         </Collapse>
